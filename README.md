@@ -173,7 +173,7 @@ There might be changes in the API of wasmtime. You may need to fix `targets/wasm
 
 ## Data
 
-Raw data, the result of the evaluation on our machine, is available as a compressed file in ![link](https://drive.google.com/file/d/1Ys3KnLRAgR7NldLYbmneLb9-7QCkr-an/view?usp=sharing) (2.3g, md5 `c763cb4be9c346ba06c06377e0268efd`). You can decompress it and see the results of the evaluation. Before you decompress the file, make sure you have 33g of disk space. We also include the excel files that contain the coverage data.
+Raw data, the result of the evaluation on our machine, is available as a compressed file in [link](https://drive.google.com/file/d/1Ys3KnLRAgR7NldLYbmneLb9-7QCkr-an/view?usp=sharing) (2.3g, md5 `c763cb4be9c346ba06c06377e0268efd`). You can decompress it and see the results of the evaluation. Before you decompress the file, make sure you have 33g of disk space. We also include the excel files that contain the coverage data.
 
 To reduce the size of the data, we only included the full coverage report only for 24 hour point on 0th try of each evaluation session. To see them, you can look into `data/rqN/*-0/report/24_0_0` of each session. For the rest of the data, we only included the summary of the coverage data, showing coverage for each source files. You can see them in `data/rqN/*/report/*` of each session and time.
 
