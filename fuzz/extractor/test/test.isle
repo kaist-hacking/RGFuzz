@@ -1,0 +1,10 @@
+;; (x ^ -1) can be replaced with the `bnot` instruction
+(rule (simplify (bxor ty x (iconst ty k)))
+  (if-let -1 (i64_sextend_imm64 ty k))
+  (bnot ty x))
+
+;; `or(and(x, y), not(y)) == or(x, not(y))`
+(rule (simplify (bor ty
+                     (band ty x y)
+                     z @ (bnot ty y)))
+      (bor ty x z))

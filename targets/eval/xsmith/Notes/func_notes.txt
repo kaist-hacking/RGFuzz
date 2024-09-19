@@ -1,0 +1,58 @@
+Type form:
+
+functype ::==  '(' 'func' t1*:vec(param) t2*:vec(result) ')'  =>  [t1*] -> [t2*]
+param    ::==  '(' 'param' id? t:valtype ')'                  =>  t
+result   ::==  '(' 'result' t:valtype ')'                     =>  t
+
+Shortening exists for anonymous parameters or results:
+'(' 'param' valtype* ')' === ('(' 'param' valtype ')')*
+'(' 'result' valtype* ')' === ('(' 'result' valtype ')')*
+
+
+Syntax form can be found in section 6.6.5:
+func𝐼 ::= ‘(’ ‘func’ id? 𝑥, 𝐼 ′ :typeuse𝐼 (𝑡:local)* (in :instr𝐼 ′′ )* ‘)’ 
+                 ⇒ {type 𝑥, locals 𝑡*, body in* end}
+                        (if 𝐼′′ = 𝐼′ ⊕ {locals id(local)*} well-formed) 
+local ::= ‘(’ ‘local’ id? 𝑡:valtype ‘)’ ⇒ 𝑡
+
+The takeaway here is that symbolic function and local identifiers can exist
+
+Examples:
+
+'''
+;; simple function
+(func (result i32))
+
+;; function with parameter
+(func (param i32) (result f32))
+
+;; function with named parameter
+(func (param $name i64) (result i32))
+
+;; function with multiple named parameters
+(func (param $foo i32) (param $bar i64) (result i32))
+
+;; function with multiple anonymous parameters
+(func (param i32 i32) (result i32))
+
+;; function with multiple anonymous parameters and returns
+(func (param i32 i32) (result i32 f32))
+
+;; named function with no return value
+(func $name (param i32))
+
+;; my current use case: named function, named parameters and named locals, with one return
+(func $func_7 (param $p_1 i32) (param $p_2 i64) (local $l_1 i32) (local $l_2 i32) (result i32))
+'''
+
+Parameters to a function are considered locals, and if referenced by index, they appear first.
+I'll probably name them and refer to them by name during generation.
+It might be easy to hook into the current local machinery though, and choose a random index after
+adding the number of parameters to the count though.... Less work this way, but less precise.
+
+To avoid recursive calls: each function should maintain a blacklist.
+    * Each function starts with itself in the list
+    * Whenever a call is made/generated: add the caller to the callee's list
+    * A function cannot call a function inside its own list
+
+

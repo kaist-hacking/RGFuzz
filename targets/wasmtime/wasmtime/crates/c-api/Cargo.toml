@@ -1,0 +1,50 @@
+[package]
+name = "wasmtime-c-api-impl"
+version.workspace = true
+authors.workspace = true
+description = "C API to expose the Wasmtime runtime"
+license = "Apache-2.0 WITH LLVM-exception"
+repository = "https://github.com/bytecodealliance/wasmtime"
+readme = "README.md"
+edition.workspace = true
+links = "wasmtime-c-api"
+include = ["include", "src", "wasm-c-api/include", "build.rs"]
+
+[lints]
+workspace = true
+
+[lib]
+name = "wasmtime_c_api"
+test = false
+doctest = false
+
+[dependencies]
+env_logger = { workspace = true, optional = true }
+anyhow = { workspace = true }
+once_cell = { workspace = true }
+wasmtime = { workspace = true, features = ['cranelift', 'runtime'] }
+wasmtime-c-api-macros = { workspace = true }
+log = { workspace = true }
+tracing = { workspace = true }
+
+# Optional dependency for the `wat2wasm` API
+wat = { workspace = true, optional = true }
+
+# Optional dependencies for the `wasi` feature
+wasmtime-wasi = { workspace = true, default-features = true, optional = true }
+cap-std = { workspace = true, optional = true }
+wasi-common = { workspace = true, optional = true, features = ["sync"] }
+
+# Optional dependencies for the `async` feature
+futures = { workspace = true, optional = true }
+
+[features]
+async = ['wasmtime/async', 'futures']
+profiling = ["wasmtime/profiling"]
+cache = ["wasmtime/cache"]
+parallel-compilation = ['wasmtime/parallel-compilation']
+wasi = ['wasmtime-wasi', 'cap-std', 'wasi-common']
+logging = ['dep:env_logger']
+disable-logging = ["log/max_level_off", "tracing/max_level_off"]
+coredump = ["wasmtime/coredump"]
+addr2line = ["wasmtime/addr2line"]

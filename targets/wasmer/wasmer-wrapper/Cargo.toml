@@ -1,0 +1,14 @@
+[package]
+name = "wasmer-wrapper"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wasmer = { version = "4.2.6", features = ["cranelift", "singlepass", "compiler"] }
+wasmer-compiler-llvm = "4.2.6"
+itertools = "0.10.5"
+anyhow = "1.0"
+rand = "0.8.5"
+xxhash-rust = { version = "0.8.10", features = ["xxh3"] }

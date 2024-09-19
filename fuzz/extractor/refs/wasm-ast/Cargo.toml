@@ -1,0 +1,27 @@
+[package]
+name = "wasm-ast"
+description = "A WebAssembly syntax model useful for generate, reading, and emitting WebAssembly code."
+version = "0.1.0"
+authors = ["Miguel D. Salcedo <miguel@salcedo.cc>"]
+edition = "2021"
+license = "Apache-2.0"
+homepage = "https://github.com/misalcedo/wasm-ast"
+repository = "https://github.com/misalcedo/wasm-ast"
+documentation = "https://docs.rs/wasm-ast"
+
+[dev-dependencies]
+criterion = "0.4"
+wasmtime = "1.0.0"
+
+[dependencies]
+nom = { version = "7", optional = true }
+thiserror = "1"
+wat = { version = "1", optional = true }
+enum-iterator = { path = "../enum-iterator/enum-iterator" }
+
+[features]
+default = []
+emitter = []
+full = ["emitter", "text"]
+parser = ["nom"]
+text = ["parser", "wat"]

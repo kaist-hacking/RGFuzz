@@ -1,0 +1,188 @@
+version: "3.9"
+
+x-rgfuzz-template: &rgfuzz_template
+  build: 
+    args:
+      UID: "${UID}"
+      GID: "${GID}"
+  user: "${UID}:${GID}"
+  volumes:
+    - ..:/fuzz/repo
+    - ../coverage:/fuzz/coverage
+  ulimits:
+    core:
+      soft: 0
+      hard: 0
+
+x-deploy: &deploy_limit
+  resources:
+    limits:
+      memory: 8G
+
+services:
+  rgfuzz-base:
+    image: rgfuzz-base
+    container_name: rgfuzz-base
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      args:
+        UID: "${UID}"
+        GID: "${GID}"
+      dockerfile: docker/Dockerfile
+
+  rgfuzz-fairness:
+    image: rgfuzz-fairness
+    container_name: rgfuzz-fairness
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      dockerfile: docker/fairness/Dockerfile
+  
+  rgfuzz-wasmtime:
+    image: rgfuzz-wasmtime
+    container_name: rgfuzz-wasmtime
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      dockerfile: docker/wasmtime/Dockerfile
+
+  rgfuzz-wasmer:
+    image: rgfuzz-wasmer
+    container_name: rgfuzz-wasmer
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      dockerfile: docker/wasmer/Dockerfile
+
+  rgfuzz-wasmedge:
+    image: rgfuzz-wasmedge
+    container_name: rgfuzz-wasmedge
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      dockerfile: docker/wasmedge/Dockerfile
+
+  rgfuzz-v8:
+    image: rgfuzz-v8
+    container_name: rgfuzz-v8
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      dockerfile: docker/v8/Dockerfile
+
+  rgfuzz-sm:
+    image: rgfuzz-sm
+    container_name: rgfuzz-sm
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      dockerfile: docker/sm/Dockerfile
+  
+  rgfuzz-jsc:
+    image: rgfuzz-jsc
+    container_name: rgfuzz-jsc
+    <<: *rgfuzz_template
+    build:
+      context: ..
+      dockerfile: docker/jsc/Dockerfile
+  
+
+  rgfuzz-wasmtime-single:
+    image: rgfuzz-wasmtime
+    container_name: rgfuzz-wasmtime-single
+    <<: *rgfuzz_template
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: 1.0
+    build:
+      context: ..
+      dockerfile: docker/wasmtime/Dockerfile
+
+  rgfuzz-wasmer-single:
+    image: rgfuzz-wasmer
+    container_name: rgfuzz-wasmer-single
+    <<: *rgfuzz_template
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: 1.0
+    build:
+      context: ..
+      dockerfile: docker/wasmer/Dockerfile
+          
+  rgfuzz-wasmedge-single:
+    image: rgfuzz-wasmedge
+    container_name: rgfuzz-wasmedge-single
+    <<: *rgfuzz_template
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: 1.0
+    build:
+      context: ..
+      dockerfile: docker/wasmedge/Dockerfile
+          
+  rgfuzz-v8-single:
+    image: rgfuzz-v8
+    container_name: rgfuzz-v8-single
+    <<: *rgfuzz_template
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: 1.0
+    build:
+      context: ..
+      dockerfile: docker/v8/Dockerfile
+          
+  rgfuzz-sm-single:
+    image: rgfuzz-sm
+    container_name: rgfuzz-sm-single
+    <<: *rgfuzz_template
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: 1.0
+    build:
+      context: ..
+      dockerfile: docker/sm/Dockerfile
+          
+  rgfuzz-jsc-single:
+    image: rgfuzz-jsc
+    container_name: rgfuzz-jsc-single
+    <<: *rgfuzz_template
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: 1.0
+    build:
+      context: ..
+      dockerfile: docker/jsc/Dockerfile
+
+
+##### FUTURE WORK
+  # rgfuzz-wamr:
+  #   image: rgfuzz-wamr
+  #   container_name: rgfuzz-wamr
+  #   <<: *rgfuzz_template
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/wamr/Dockerfile
+          
+  # rgfuzz-wamr-single:
+  #   image: rgfuzz-wamr
+  #   container_name: rgfuzz-wamr-single
+  #   <<: *rgfuzz_template
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 8G
+  #         cpus: 1.0
+#####

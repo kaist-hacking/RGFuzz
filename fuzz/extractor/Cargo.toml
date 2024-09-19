@@ -1,0 +1,32 @@
+[package]
+name = "extractor"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true
+codegen-units = 1
+opt-level = 3
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+nix = "0.26"
+log = { version = "*" }
+anyhow = {version = "*" }
+thiserror = "1.0.28"
+ahash = { version = "0.8.7", default-features = false }
+serde = { version = "1.0", default-features = false, features = ["alloc", "derive"] }
+cranelift-isle = { path = "../../targets/wasmtime/wasmtime/cranelift/isle/isle" }
+cranelift-wasm = { path = "../../targets/wasmtime/wasmtime/cranelift/wasm" }
+cranelift-codegen = { path = "../../targets/wasmtime/wasmtime/cranelift/codegen" }
+cranelift-codegen-meta = { path = "../../targets/wasmtime/wasmtime/cranelift/codegen/meta" }
+wasm-ast = { path = "./refs/wasm-ast", features = ["parser", "emitter"] }
+target-lexicon = { version = "*" }
+enum-iterator = { path = "./refs/enum-iterator/enum-iterator" }
+itertools = "0.10.5"

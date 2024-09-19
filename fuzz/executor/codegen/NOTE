@@ -1,0 +1,2 @@
+* `components.py` and `encode.py` contents are mostly from https://github.com/almarklein/wasmfun, but with modifications
+* Other files are newly written
