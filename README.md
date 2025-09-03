@@ -1,6 +1,6 @@
 # RGFuzz
 
-This repository contains the artifact (source, data, documentation) to reproduce the results of the paper: "RGFuzz: Fuzzing WebAssembly Runtimes Using Compiler Rules", IEEE S&P 2025 (to appear).
+This repository contains the artifact (source, data, documentation) to reproduce the results of the paper: "RGFuzz: Fuzzing WebAssembly Runtimes Using Compiler Rules", IEEE S&P 2025.
 
 ## Contents
 
