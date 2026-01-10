@@ -2,6 +2,17 @@ FROM rgfuzz-base
 
 ARG UNAME=guest
 
+# Install clang-18 - clang-19 errors
+# Also install lib32gcc-12-dev for 32-bit builds (version 11 does not work)
+USER root
+RUN echo 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main' >> /etc/apt/sources.list
+RUN echo 'deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main' >> /etc/apt/sources.list
+RUN dpkg --add-architecture i386
+RUN apt update
+RUN apt install -y clang-18 libstdc++-11-dev g++-multilib libc6-dev-i386 zlib1g-dev:i386
+USER $UNAME
+RUN $HOME/.cargo/bin/cargo install cbindgen
+
 # Download
 WORKDIR /fuzz/targets/spidermonkey/gecko-dev
 RUN git init

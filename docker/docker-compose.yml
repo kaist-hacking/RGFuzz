@@ -165,24 +165,3 @@ services:
     build:
       context: ..
       dockerfile: docker/jsc/Dockerfile
-
-
-##### FUTURE WORK
-  # rgfuzz-wamr:
-  #   image: rgfuzz-wamr
-  #   container_name: rgfuzz-wamr
-  #   <<: *rgfuzz_template
-  #   build:
-  #     context: ..
-  #     dockerfile: docker/wamr/Dockerfile
-          
-  # rgfuzz-wamr-single:
-  #   image: rgfuzz-wamr
-  #   container_name: rgfuzz-wamr-single
-  #   <<: *rgfuzz_template
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         memory: 8G
-  #         cpus: 1.0
-#####

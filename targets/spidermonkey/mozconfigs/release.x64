@@ -2,6 +2,7 @@
 ac_add_options --enable-application=js
 ac_add_options --disable-tests
 ac_add_options --disable-shared-js
+ac_add_options --disable-bootstrap
 
 # Enable the debugging tools: Assertions, debug only code etc.
 ac_add_options --disable-debug
@@ -13,3 +14,6 @@ ac_add_options --enable-optimize
 # Use a dedicated objdir for SpiderMonkey debug builds to avoid
 # conflicting with Firefox build with default configuration.
 #mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-debug-@CONFIG_GUESS@
+
+export CC=/usr/bin/clang-18
+export CXX=/usr/bin/clang++-18

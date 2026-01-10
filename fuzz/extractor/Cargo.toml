@@ -17,8 +17,8 @@ opt-level = 3
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
 nix = "0.26"
-log = { version = "*" }
-anyhow = {version = "*" }
+log = "0.4.8"
+anyhow = "1.0"
 thiserror = "1.0.28"
 ahash = { version = "0.8.7", default-features = false }
 serde = { version = "1.0", default-features = false, features = ["alloc", "derive"] }
@@ -27,6 +27,6 @@ cranelift-wasm = { path = "../../targets/wasmtime/wasmtime/cranelift/wasm" }
 cranelift-codegen = { path = "../../targets/wasmtime/wasmtime/cranelift/codegen" }
 cranelift-codegen-meta = { path = "../../targets/wasmtime/wasmtime/cranelift/codegen/meta" }
 wasm-ast = { path = "./refs/wasm-ast", features = ["parser", "emitter"] }
-target-lexicon = { version = "*" }
+target-lexicon = "0.12.12"
 enum-iterator = { path = "./refs/enum-iterator/enum-iterator" }
 itertools = "0.10.5"

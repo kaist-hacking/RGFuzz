@@ -10,7 +10,7 @@ WORKDIR /fuzz/targets/v8/v8
 RUN git fetch origin tag 12.6.21 --no-tags --depth=1
 # RUN git fetch --tags
 RUN git reset --hard 12.6.21
-# RUN rm -rf /fuzz/targets/v8/.cipd
+RUN rm -rf /fuzz/targets/v8/.cipd
 RUN export PATH=$PATH:/fuzz/depot_tools; gclient sync
 USER root
 RUN build/install-build-deps.sh

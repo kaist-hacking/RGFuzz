@@ -40,7 +40,7 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
 
 COPY --chown=${UID}:${GID} targets/wasmtime/wasmtime-wrapper/.cargo $HOME/.cargo
-RUN $HOME/.cargo/bin/rustup default nightly
+RUN $HOME/.cargo/bin/rustup default nightly-2025-05-05
 RUN $HOME/.cargo/bin/rustup target add aarch64-unknown-linux-gnu
 RUN $HOME/.cargo/bin/rustup target add riscv64gc-unknown-linux-gnu
 RUN $HOME/.cargo/bin/rustup target add s390x-unknown-linux-gnu

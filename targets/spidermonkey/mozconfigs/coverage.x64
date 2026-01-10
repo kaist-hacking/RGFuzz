@@ -2,6 +2,7 @@
 ac_add_options --enable-application=js
 ac_add_options --disable-tests
 ac_add_options --disable-shared-js
+ac_add_options --disable-bootstrap
 
 # Enable the debugging tools: Assertions, debug only code etc.
 ac_add_options --disable-debug
@@ -16,8 +17,11 @@ ac_add_options --enable-optimize
 
 #ac_add_options --enable-coverage
 
-CLANG_LIB_DIR="$(cd $MOZ_FETCHES_DIR/clang/lib/clang/* && cd lib/linux && pwd)"
+CLANG_LIB_DIR="$(clang-18 --print-resource-dir)/lib/linux"
 export LDFLAGS="-fprofile-instr-generate -fcoverage-mapping -L$CLANG_LIB_DIR"
 export LIBS="-lclang_rt.profile-x86_64"
 export RUSTFLAGS="-Ccodegen-units=1 -Cinstrument-coverage  -Cpanic=abort -Zpanic_abort_tests -Clink-dead-code -Coverflow-checks=off"
 export RUSTDOCFLAGS="-Cpanic=abort"
+
+export CC=/usr/bin/clang-18
+export CXX=/usr/bin/clang++-18

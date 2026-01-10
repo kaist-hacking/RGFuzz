@@ -8,6 +8,6 @@ edition = "2021"
 [dependencies]
 cranelift-wasm = { path = "../../../targets/wasmtime/wasmtime/cranelift/wasm" }
 cranelift-codegen = { path = "../../../targets/wasmtime/wasmtime/cranelift/codegen" }
-target-lexicon = { version = "*" }
+target-lexicon = "0.12.12"
 itertools = "0.10.5"
 anyhow = "1.0"

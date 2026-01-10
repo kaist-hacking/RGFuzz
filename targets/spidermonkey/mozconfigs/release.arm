@@ -2,6 +2,7 @@
 ac_add_options --enable-application=js
 ac_add_options --disable-tests
 ac_add_options --disable-shared-js
+ac_add_options --disable-bootstrap
 
 # Enable the debugging tools: Assertions, debug only code etc.
 ac_add_options --disable-debug
@@ -16,3 +17,10 @@ ac_add_options --enable-optimize
 
 ac_add_options --target=i686-pc-linux-gnu
 ac_add_options --enable-simulator=arm
+
+export CC=/usr/bin/clang-18
+export CXX=/usr/bin/clang++-18
+
+# This avoids multiple definition errors in 32-bit fdlibm
+export CFLAGS="-m32 -msse2 -mfpmath=sse"
+export CXXFLAGS="-m32 -msse2 -mfpmath=sse"
